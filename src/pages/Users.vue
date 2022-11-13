@@ -1,34 +1,36 @@
 <template>
 	<div class="container">
 		<div class="header">
-			<a href="./index.html"> <img :src="require('@/assets/img/Logo.svg')" alt="logo" draggable="false" /> </a>
+			<router-link to="/">
+				<img :src="require('@/assets/img/Logo.svg')" alt="logo" draggable="false" />
+			</router-link>
 			<div class="header__links">
-				<a href="./index.html">Главная</a>
-				<a href="./users.html" class="links__main">Пользователи</a>
-				<a href="./search.html">Поиск</a>
+				<router-link to="/"> Главная </router-link>
+				<router-link to="/Users" class="links__main"> Пользователи </router-link>
+				<router-link to="/Search"> Поиск </router-link>
 			</div>
 		</div>
 		<div class="main">
 			<div class="main__table">
 				<div class="table__lists">
 					<p>Илья Петров</p>
-					<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" />
+					<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" $ref="arrows" />
 				</div>
 				<hr width="100%" color="white" />
 
 				<div class="table__lists">
 					<p>Александр Смирнов</p>
-					<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" />
+					<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" $ref="arrows" />
 				</div>
 				<hr width="100%" color="white" />
 
 				<div class="table__lists">
 					<p>Петр Иванов</p>
-					<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" />
+					<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" $ref="arrows" />
 				</div>
 
-				<hr width="100%" color="white" class="hr" />
-				<div class="table__description-block">
+				<hr width="100%" color="white" class="hr" $ref="hr" />
+				<div class="table__description-block" $ref="open">
 					<div class="table__description">
 						<p>Name: Петр Иванов</p>
 						<p>Username: Petr.Ivanov</p>
@@ -41,7 +43,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+	data() {
+		return {};
+	},
+
+	methods: {
+		openMenu() {
+			console.log('!!!');
+			// this.$refs.open.classList.toggle('open');
+			// this.$refs.hr.classList.toggle('hr-view');
+			// this.$refs.arrow.classList.toggle('arrowAnim');
+		},
+	},
+};
 </script>
 
 <style scoped>

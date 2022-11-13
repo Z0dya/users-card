@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../components/Home.vue';
-import Users from '../components/Users.vue';
-import Search from '../components/Search.vue';
+import Home from '../pages/Home.vue';
+import Users from '../pages/Users.vue';
+import Search from '../pages/Search.vue';
+import NotFound from '../pages/NotFound.vue';
 
 Vue.use(VueRouter);
-
 const routes = [
 	{
 		path: '/',
@@ -21,6 +21,15 @@ const routes = [
 		path: '/search',
 		name: 'search',
 		component: Search,
+	},
+	{
+		path: '/404',
+		name: '404',
+		component: NotFound,
+	},
+	{
+		path: '*',
+		redirect: '/404',
 	},
 ];
 

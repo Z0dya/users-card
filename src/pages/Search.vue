@@ -1,11 +1,13 @@
 <template>
 	<div class="container">
 		<div class="header">
-			<a href="./Home.vue"> <img :src="require('@/assets/img/Logo.svg')" alt="logo" draggable="false" /> </a>
+			<router-link to="/">
+				<img :src="require('@/assets/img/Logo.svg')" alt="logo" draggable="false" />
+			</router-link>
 			<div class="header__links">
-				<a href="./index.html">Главная</a>
-				<a href="./Users.vue">Пользователи</a>
-				<a href="./Search.vue" class="links__main">Поиск</a>
+				<router-link to="/"> Главная </router-link>
+				<router-link to="/Users"> Пользователи </router-link>
+				<router-link to="/Search" class="links__main"> Поиск </router-link>
 			</div>
 		</div>
 		<div class="main">
@@ -84,6 +86,8 @@ html {
 .main {
 	margin: 10rem 0;
 	height: 100%;
+	display: flex;
+	justify-content: center;
 }
 
 .search {

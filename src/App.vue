@@ -1,19 +1,30 @@
 <template>
 	<div id="app">
-		<home />
+		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-import Home from './components/Home.vue';
+import Home from './pages/Home.vue';
+import Users from './pages/Users.vue';
+import Search from './pages/Search.vue';
+import NotFound from './pages/NotFound.vue';
 
 export default {
 	name: 'App',
-	components: { Home },
+	components: { Home, Users, Search, NotFound },
 	data: function () {
 		return {};
 	},
 };
 </script>
 
-<style></style>
+<style>
+html {
+	height: 100%;
+	font-size: 62.5%;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+</style>

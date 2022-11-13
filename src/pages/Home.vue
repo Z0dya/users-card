@@ -2,11 +2,13 @@
 	<div id="app">
 		<div class="container">
 			<div class="header">
-				<img :src="require('@/assets/img/Logo.svg')" :alt="eofmwe" draggable="false" />
+				<router-link to="/">
+					<img :src="require('@/assets/img/Logo.svg')" alt="logo" draggable="false" />
+				</router-link>
 				<div class="header__links">
-					<a href="#" class="links__main">Главная</a>
-					<a href="#">Пользователи</a>
-					<a href="#">Поиск</a>
+					<router-link to="/" class="links__main"> Главная </router-link>
+					<router-link to="/Users"> Пользователи </router-link>
+					<router-link to="/Search"> Поиск </router-link>
 				</div>
 			</div>
 			<div class="main">
@@ -16,11 +18,13 @@
 						Практическое задание
 						<span class="title-vue">Vue Js</span>
 					</h1>
-					<button class="left__btnWork">Перейти к работе</button>
+					<router-link to="/Users" class="btnLink"> <button class="left__btnWork">Перейти к работе</button> </router-link>
 					<div class="left__description">
 						<p>Исходники веб-приложения вы можете найти тут</p>
 						<div class="icons">
-							<a href="#"> <img :src="require('@/assets/img/Git.svg')" class="github" alt="gitLogo" draggable="false" /> </a>
+							<a href="https://github.com/Z0dya/users-card" target="_blank">
+								<img :src="require('@/assets/img/Git.svg')" class="github" alt="gitLogo" draggable="false" />
+							</a>
 							<a href="#"> <img :src="require('@/assets/img/gitlab.svg')" class="gitlab" alt="gitlabLogo" draggable="false" /> </a>
 						</div>
 					</div>
@@ -126,9 +130,14 @@ html {
 	border: none;
 	font-size: 2.4rem;
 	font-weight: 500;
-	margin: 10rem 0;
 	cursor: pointer;
 	transition: all 0.5s;
+}
+
+.btnLink {
+	width: fit-content;
+	height: fit-content;
+	margin: 10rem 0;
 }
 
 .aBtn {
