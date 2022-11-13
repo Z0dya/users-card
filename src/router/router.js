@@ -28,6 +28,10 @@ const routes = [
 		component: NotFound,
 	},
 	{
+		path: '/home',
+		redirect: '/',
+	},
+	{
 		path: '*',
 		redirect: '/404',
 	},

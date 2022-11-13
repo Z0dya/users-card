@@ -1,59 +1,37 @@
 <template>
 	<div class="container">
-		<div class="header">
-			<router-link to="/">
-				<img :src="require('@/assets/img/Logo.svg')" alt="logo" draggable="false" />
-			</router-link>
-			<div class="header__links">
-				<router-link to="/"> Главная </router-link>
-				<router-link to="/Users" class="links__main"> Пользователи </router-link>
-				<router-link to="/Search"> Поиск </router-link>
-			</div>
-		</div>
+		<Header></Header>
 		<div class="main">
 			<div class="main__table">
-				<div class="table__lists">
-					<p>Илья Петров</p>
-					<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" $ref="arrows" />
-				</div>
-				<hr width="100%" color="white" />
-
-				<div class="table__lists">
-					<p>Александр Смирнов</p>
-					<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" $ref="arrows" />
-				</div>
-				<hr width="100%" color="white" />
-
-				<div class="table__lists">
-					<p>Петр Иванов</p>
-					<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" $ref="arrows" />
-				</div>
-
-				<hr width="100%" color="white" class="hr" $ref="hr" />
-				<div class="table__description-block" $ref="open">
-					<div class="table__description">
-						<p>Name: Петр Иванов</p>
-						<p>Username: Petr.Ivanov</p>
-						<p>Email: Petr.Ivanov</p>
-					</div>
-				</div>
+				<user-component v-for="user in userList" :key="user.id" :id="user.id" :name="user.name" :email="user.email"></user-component>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import UserComponent from '@/components/UserComponent.vue';
+import Header from '../components/Header.vue';
+
 export default {
 	data() {
-		return {};
+		return {
+			userList: [
+				{ id: 1, name: 'Илья Петров', email: 'Ilya.Petrov' },
+				{ id: 2, name: 'Александр Смирнов', email: 'Alec.Smirnov' },
+				{ id: 3, name: 'Пётр Иванов', email: 'Petr.Ivanov' },
+			],
+		};
 	},
-
+	components: {
+		Header,
+		UserComponent,
+	},
 	methods: {
 		openMenu() {
-			console.log('!!!');
-			// this.$refs.open.classList.toggle('open');
-			// this.$refs.hr.classList.toggle('hr-view');
-			// this.$refs.arrow.classList.toggle('arrowAnim');
+			this.$refs.open.classList.toggle('open');
+			this.$refs.hr.classList.toggle('hr-view');
+			this.$refs.arrows.classList.toggle('arrowAnim');
 		},
 	},
 };
@@ -71,37 +49,6 @@ html {
 .container {
 	margin: 5rem 25rem;
 }
-
-/*? HEADER */
-
-.header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.header__links {
-	font-size: 2rem;
-	margin-right: 5rem;
-}
-
-.links__main {
-	display: inline;
-	border-bottom: solid 3px #263138;
-}
-
-.header a {
-	color: #445964;
-	margin: 0 3rem;
-	text-decoration: none;
-}
-
-.header__links a:hover {
-	display: inline;
-	border-bottom: solid 3px #263138;
-	transition: all 0.1s;
-}
-
 /*? Main */
 
 .main {
@@ -120,71 +67,6 @@ html {
 	border-radius: 10px;
 }
 
-.table__lists,
-.table__lists-open {
-	display: flex;
-	justify-content: space-between;
-	margin: 0 4rem;
-	font-size: 2.5rem;
-	color: white;
-	font-weight: 400;
-	align-items: center;
-}
-
-.arrow,
-.arrow-open {
-	cursor: pointer;
-	width: 5rem;
-	height: 3rem;
-	transition: all 0.3s ease;
-}
-
-.arrowAnim {
-	transition: all 0.3s ease;
-	-webkit-transform: rotate(-90deg);
-	transform: rotate(-90deg);
-}
-
-/* arrow opened */
-
-.table__lists-open {
-	display: none !important;
-}
-
-.table__description-block {
-	display: none;
-	flex-direction: column;
-	background-color: #263138;
-	width: 120rem;
-	height: fit-content;
-	margin: 2rem;
-	border-radius: 1rem;
-}
-
-.open {
-	display: flex;
-}
-
-.hr {
-	display: none;
-}
-
-.hr-view {
-	display: block;
-}
-
-.table__description {
-	margin: 0.5rem 2rem;
-	background-color: #445964;
-	width: 45rem;
-	height: 20rem;
-	color: white;
-	font-size: 2rem;
-	font-weight: 500;
-	margin: 2rem;
-	padding-left: 2rem;
-	border-radius: 1rem;
-}
 
 /* ------------ */
 </style>

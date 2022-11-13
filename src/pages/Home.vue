@@ -1,16 +1,7 @@
 <template>
 	<div id="app">
 		<div class="container">
-			<div class="header">
-				<router-link to="/">
-					<img :src="require('@/assets/img/Logo.svg')" alt="logo" draggable="false" />
-				</router-link>
-				<div class="header__links">
-					<router-link to="/" class="links__main"> Главная </router-link>
-					<router-link to="/Users"> Пользователи </router-link>
-					<router-link to="/Search"> Поиск </router-link>
-				</div>
-			</div>
+			<Header></Header>
 			<div class="main">
 				<div class="leftSide">
 					<p class="left__name">Лазуткин Влад</p>
@@ -39,9 +30,10 @@
 </template>
 
 <script>
+import Header from '../components/Header.vue';
 export default {
 	name: 'App',
-	components: {},
+	components: { Header },
 	data: function () {
 		return {};
 	},
@@ -59,36 +51,6 @@ html {
 
 .container {
 	margin: 5rem 25rem;
-}
-
-/*? HEADER */
-
-.header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.header__links {
-	font-size: 2rem;
-	margin-right: 5rem;
-}
-
-.links__main {
-	display: inline;
-	border-bottom: solid 3px #263138;
-}
-
-.header a {
-	color: #445964;
-	margin: 0 3rem;
-	text-decoration: none;
-}
-
-.header__links a:hover {
-	display: inline;
-	border-bottom: solid 3px #263138;
-	transition: all 0.1s;
 }
 
 /*? MAIN */
