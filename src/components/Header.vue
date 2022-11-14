@@ -4,6 +4,8 @@
 			<img :src="require('@/assets/img/Logo.svg')" alt="logo" draggable="false" />
 		</router-link>
 		<div class="header__links">
+			<!-- router-link - определяет на какой странице находится пользователь -->
+			<!-- зарезервированный класс router-link-active добавляет стили -->
 			<router-link to="/" exact> Главная </router-link>
 			<router-link to="/Users"> Пользователи </router-link>
 			<router-link to="/Search"> Поиск </router-link>

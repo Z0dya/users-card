@@ -2,8 +2,21 @@
 	<div class="container">
 		<Header></Header>
 		<div class="main">
-			<div class="main__table">
-				<user-component v-for="user in userList" :key="user.id" :id="user.id" :name="user.name" :email="user.email"></user-component>
+			<div class="main__table" v-if="allData">
+				<user-component
+					v-for="(user, index) in allData"
+					:key="user.id"
+					:index="index"
+					:length="allData.length"
+					:id="user.id"
+					:name="user.name"
+					:username="user.username"
+					:email="user.email"
+					:city="user.address?.city"
+					:website="user.website"
+					:company="user.company?.name"
+				></user-component>
+				<!-- adress?.city - если существует то ищет city иначе undefined -->
 			</div>
 		</div>
 	</div>
@@ -12,27 +25,20 @@
 <script>
 import UserComponent from '@/components/UserComponent.vue';
 import Header from '../components/Header.vue';
+import { mapGetters } from 'vuex';
 
 export default {
 	data() {
-		return {
-			userList: [
-				{ id: 1, name: 'Илья Петров', email: 'Ilya.Petrov' },
-				{ id: 2, name: 'Александр Смирнов', email: 'Alec.Smirnov' },
-				{ id: 3, name: 'Пётр Иванов', email: 'Petr.Ivanov' },
-			],
-		};
+		return {};
 	},
+	//регистрируем компоненты
 	components: {
 		Header,
 		UserComponent,
 	},
-	methods: {
-		openMenu() {
-			this.$refs.open.classList.toggle('open');
-			this.$refs.hr.classList.toggle('hr-view');
-			this.$refs.arrows.classList.toggle('arrowAnim');
-		},
+	computed: mapGetters(['allData']),
+	mounted() {
+		this.$store.dispatch('fetchUsers');
 	},
 };
 </script>
@@ -48,13 +54,13 @@ html {
 
 .container {
 	margin: 5rem 25rem;
+	height: calc(125vh);
 }
 /*? Main */
 
 .main {
 	margin: 7rem;
 	width: 124.1rem;
-	height: fit-content;
 	background-color: #324c5a;
 	display: flex;
 	border-radius: 1rem;
@@ -66,7 +72,6 @@ html {
 	box-shadow: 15px 17px 20px 10px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 }
-
 
 /* ------------ */
 </style>

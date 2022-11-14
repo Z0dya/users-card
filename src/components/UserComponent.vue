@@ -2,17 +2,35 @@
 	<div>
 		<div class="table__lists">
 			<p>{{ name }}</p>
-			<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" ref="arrows" @click="openMenu()" />
+			<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" ref="arrow" @click="openMenu()" />
 		</div>
-		<hr width="100%" color="white" />
-		<hr width="100%" color="white" class="hr" ref="hr" />
+		<!-- <hr width="100%" color="white" /> -->
+
 		<div class="table__description-block" ref="open">
 			<div class="table__description">
-				<p>Name: {{ name }}</p>
-				<p>Username: {{ email }}</p>
-				<p>Email: {{ email }}</p>
+				<p>
+					Name: <span>{{ name }}</span>
+				</p>
+				<p>
+					Username: <span>{{ username }}</span>
+				</p>
+				<p>
+					City: <span>{{ city }}</span>
+				</p>
+			</div>
+			<div class="table__description">
+				<p>
+					Email: <span>{{ email }}</span>
+				</p>
+				<p>
+					Website: <span> {{ website }} </span>
+				</p>
+				<p>
+					Company: <span>{{ company }} </span>
+				</p>
 			</div>
 		</div>
+		<hr width="100%" color="white" class="hr" ref="hr" />
 	</div>
 </template>
 
@@ -20,11 +38,27 @@
 export default {
 	props: {
 		id: Number,
+		index: Number,
+		length: Number,
 		name: String,
+		username: String,
 		email: String,
+		city: String,
+		website: String,
+		company: String,
 	},
 	data: function () {
 		return {};
+	},
+	methods: {
+		openMenu() {
+			this.$refs.arrow.classList.toggle('arrowAnim');
+			this.$refs.open.classList.toggle('open');
+			//если не последний div то отрисовываем hr
+			if (this.index !== this.length - 1) {
+				this.$refs.hr.classList.toggle('hr-view');
+			}
+		},
 	},
 };
 </script>
@@ -63,7 +97,8 @@ export default {
 
 .table__description-block {
 	display: none;
-	flex-direction: column;
+	justify-content: center;
+	gap: 12rem;
 	background-color: #263138;
 	width: 120rem;
 	height: fit-content;
@@ -87,13 +122,15 @@ export default {
 	margin: 0.5rem 2rem;
 	background-color: #445964;
 	width: 45rem;
-	height: 20rem;
+	height: 15rem;
 	color: white;
 	font-size: 2rem;
-	font-weight: 500;
+	font-weight: 400;
 	margin: 2rem;
 	padding-left: 2rem;
 	border-radius: 1rem;
 }
-
+span {
+	color: #c3eafc;
+}
 </style>
