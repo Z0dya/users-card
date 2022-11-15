@@ -17,6 +17,8 @@
 						:id="usersInfo.id"
 						:name="usersInfo.name"
 						:website="usersInfo.website"
+						:subSearch="usersInfo.subSearch"
+						:findIndex="usersInfo.findIndex"
 					></search-component>
 				</div>
 				<div class="noResults" ref="notFound">
@@ -54,13 +56,25 @@ export default {
 			this.searchedUser = [];
 			//перебираем имена из api
 			for (const user of this.allData) {
-				// записываем регулярное выражение (игнорировать регистр) в переменную regValue
+				// записываем регулярное выражение (игнорировать регистр написанного слова) в переменную regValue
 				const regValue = new RegExp(this.searchValue, 'i');
-				// у каждого имени пытаемся найти строчку которую ввели в input'e
-				if (user.name.search(regValue) !== -1) {
-					// записываем в массив объект с именем и сайтом
-					
-					this.searchedUser.push({ name: user.name, website: user.website });
+				// индекс той буквы которая 1 оказалась найдена
+				const findIndex = user.name.search(regValue);
+				// проверка, если -1  - не найдено, иначе найдено и вернёт индекс
+				if (findIndex !== -1) {
+					// записываем в массив объект с
+					// id,
+					// именем,
+					// сайтом,
+					//  написанным словом,
+					//  первой буквой написанного слова
+					this.searchedUser.push({
+						id: user.id,
+						name: user.name,
+						website: user.website,
+						subSearch: this.searchValue,
+						findIndex: findIndex,
+					});
 				}
 			}
 
@@ -72,6 +86,7 @@ export default {
 				// иначе отображаем "не найдено"
 				this.$refs.notFound.classList.add('display');
 			}
+			// если пользователь ничего не ввел то выводим "ничего не найдено"
 			if (this.searchValue == '') {
 				{
 					this.$refs.result.classList.remove('display');
