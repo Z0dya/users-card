@@ -18,6 +18,9 @@
 				></user-component>
 				<!-- adress?.city - если существует то ищет city иначе undefined -->
 			</div>
+			<div v-else>
+				<h1>Пожалуйста, подождите</h1>
+			</div>
 		</div>
 	</div>
 </template>
@@ -72,6 +75,8 @@ html {
 	box-shadow: 15px 17px 20px 10px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 }
-
+h1 {
+	color: #1f2020;
+}
 /* ------------ */
 </style>

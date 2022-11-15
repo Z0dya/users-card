@@ -5,20 +5,22 @@
 			<div class="search">
 				<div class="search__icons">
 					<div class="left-side">
-						<img :src="require('@/assets/img/cancel.svg')" alt="cancel" class="cancelIcon" />
-						<input type="text" value="Пет" class="search__text" />
+						<img :src="require('@/assets/img/cancel.svg')" alt="cancel" class="cancelIcon" @click="clearSearch()" />
+						<input type="text" placeholder="Введите имя" class="search__text" v-model="searchValue" />
 					</div>
-					<img :src="require('@/assets/img/search.svg')" alt="search" class="searchIcon" />
+					<img :src="require('@/assets/img/search.svg')" alt="search" class="searchIcon" ref="search" @click="searchResult()" />
 				</div>
-				<div class="search__results">
-					<div class="results__lists">
-						<p>Петр Иванов</p>
-						<a href="#">some.site.ru</a>
-					</div>
-					<div class="results__lists">
-						<p>Иван Петров</p>
-						<a href="#">some.site.ru</a>
-					</div>
+				<div class="search__results" ref="result">
+					<search-component
+						v-for="usersInfo in searchedUser"
+						:key="usersInfo.id"
+						:id="usersInfo.id"
+						:name="usersInfo.name"
+						:website="usersInfo.website"
+					></search-component>
+				</div>
+				<div class="noResults" ref="notFound">
+					<h1>Не найдено 😞</h1>
 				</div>
 			</div>
 		</div>
@@ -27,12 +29,66 @@
 
 <script>
 import Header from '../components/Header.vue';
+import SearchComponent from '../components/SearchComponent.vue';
+import { mapGetters } from 'vuex';
 
 export default {
-	name: 'App',
-	components: { Header },
-	data: function () {
-		return {};
+	components: {
+		Header,
+		SearchComponent,
+	},
+	data() {
+		return {
+			searchValue: '',
+			searchedUser: [],
+		};
+	},
+	computed: mapGetters(['allData']),
+	mounted() {
+		this.$store.dispatch('fetchUsers');
+	},
+	methods: {
+		// функция поиска
+		searchResult() {
+			//обнуляем массив при каждом поиске
+			this.searchedUser = [];
+			//перебираем имена из api
+			for (const user of this.allData) {
+				// записываем регулярное выражение (игнорировать регистр) в переменную regValue
+				const regValue = new RegExp(this.searchValue, 'i');
+				// у каждого имени пытаемся найти строчку которую ввели в input'e
+				if (user.name.search(regValue) !== -1) {
+					// записываем в массив объект с именем и сайтом
+					
+					this.searchedUser.push({ name: user.name, website: user.website });
+				}
+			}
+
+			// выводим найденных юзеров
+			if (this.searchedUser.length) {
+				this.$refs.result.classList.add('display');
+				this.$refs.notFound.classList.remove('display');
+			} else {
+				// иначе отображаем "не найдено"
+				this.$refs.notFound.classList.add('display');
+			}
+			if (this.searchValue == '') {
+				{
+					this.$refs.result.classList.remove('display');
+					this.$refs.notFound.classList.add('display');
+				}
+			}
+		},
+
+		//функция очистки (cancel)
+		clearSearch() {
+			// стираем value input'a и закрываем найденные до этого значения
+			this.searchValue = '';
+			this.$refs.notFound.classList.remove('display');
+			if (this.$refs.result.classList.contains('display')) {
+				this.$refs.result.classList.remove('display');
+			}
+		},
 	},
 };
 </script>
@@ -83,6 +139,28 @@ html {
 	align-items: center;
 }
 
+.search__results {
+	display: none;
+	margin: 5rem 0;
+	background-color: #d9d9d9;
+	width: 104rem;
+	height: fit-content;
+	border-radius: 1rem;
+	box-shadow: 13px 12px 15px -2px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	border-radius: 20px;
+}
+
+.noResults {
+	display: none;
+	margin: 5rem;
+	font-size: 3rem;
+	color: #263138;
+}
+
+.display {
+	display: block;
+}
 .search__icons img {
 	cursor: pointer;
 }
@@ -93,41 +171,5 @@ html {
 	background-color: #d9d9d9;
 	border: none;
 	width: 73rem;
-}
-
-/* Search result */
-
-.search__results {
-	margin: 10rem 0;
-	background-color: #d9d9d9;
-	width: 104rem;
-	height: fit-content;
-	border-radius: 1rem;
-	box-shadow: 13px 12px 15px -2px rgba(0, 0, 0, 0.25);
-	border-radius: 20px;
-	border-radius: 20px;
-}
-
-.results__lists {
-	margin: 2rem 2rem;
-	background-color: #445964;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-radius: 2rem;
-	padding: 0 2rem;
-}
-
-.results__lists p {
-	font-size: 2.6rem;
-	font-weight: 500;
-	color: white;
-}
-
-.results__lists a {
-	font-size: 2.6rem;
-	font-weight: 500;
-	color: #d3f1ff;
-	text-decoration: none;
 }
 </style>

@@ -18,12 +18,19 @@
 					City: <span>{{ city }}</span>
 				</p>
 			</div>
+			<img :src="require('@/assets/img/icon.svg')" alt="arrow" class="logoIcon" />
 			<div class="table__description">
 				<p>
-					Email: <span>{{ email }}</span>
+					Email:
+					<span>
+						<a href="mailto:">{{ email }}</a>
+					</span>
 				</p>
 				<p>
-					Website: <span> {{ website }} </span>
+					Website:
+					<span>
+						<a :href="'https://' + website" target="_blank"> {{ website }}</a>
+					</span>
 				</p>
 				<p>
 					Company: <span>{{ company }} </span>
@@ -98,12 +105,20 @@ export default {
 .table__description-block {
 	display: none;
 	justify-content: center;
-	gap: 12rem;
+	/* gap: 4rem; */
 	background-color: #263138;
 	width: 120rem;
 	height: fit-content;
 	margin: 2rem;
 	border-radius: 1rem;
+}
+
+.logoIcon {
+	width: 15rem;
+	height: 15rem;
+	display: flex;
+	align-self: center;
+	justify-content: center;
 }
 
 .open {
@@ -132,5 +147,13 @@ export default {
 }
 span {
 	color: #c3eafc;
+}
+
+a {
+	text-decoration: none;
+	color: #c3eafc;
+}
+a:hover {
+	border-bottom: solid 0.1rem #c3eafc;
 }
 </style>
