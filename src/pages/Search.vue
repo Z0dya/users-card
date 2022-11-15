@@ -18,7 +18,7 @@
 						:name="usersInfo.name"
 						:website="usersInfo.website"
 						:subSearch="usersInfo.subSearch"
-						:findIndex="usersInfo.findIndex"
+						:stringArray="usersInfo.stringArray"
 					></search-component>
 				</div>
 				<div class="noResults" ref="notFound">
@@ -59,9 +59,9 @@ export default {
 				// записываем регулярное выражение (игнорировать регистр написанного слова) в переменную regValue
 				const regValue = new RegExp(this.searchValue, 'i');
 				// индекс той буквы которая 1 оказалась найдена
-				const findIndex = user.name.search(regValue);
+				const stringArray = user.name.split(regValue);
 				// проверка, если -1  - не найдено, иначе найдено и вернёт индекс
-				if (findIndex !== -1) {
+				if (stringArray.length !== 1) {
 					// записываем в массив объект с
 					// id,
 					// именем,
@@ -73,11 +73,10 @@ export default {
 						name: user.name,
 						website: user.website,
 						subSearch: this.searchValue,
-						findIndex: findIndex,
+						stringArray: stringArray,
 					});
 				}
 			}
-
 			// выводим найденных юзеров
 			if (this.searchedUser.length) {
 				this.$refs.result.classList.add('display');
@@ -94,7 +93,6 @@ export default {
 				}
 			}
 		},
-
 		//функция очистки (cancel)
 		clearSearch() {
 			// стираем value input'a и закрываем найденные до этого значения
@@ -147,6 +145,24 @@ html {
 	box-shadow: 10px 10px 9px -2px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 	padding: 0 2rem;
+}
+
+.searchIcon {
+	opacity: 0.7;
+	transition: all 0.2s ease;
+}
+
+.searchIcon:hover {
+	opacity: 1;
+}
+
+.cancelIcon {
+	opacity: 0.7;
+	transition: all 0.2s ease;
+}
+
+.cancelIcon:hover {
+	opacity: 1;
 }
 
 .left-side {

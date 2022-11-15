@@ -1,10 +1,7 @@
 <template>
 	<div class="results__lists">
-		<!-- 1 часть слова + написанное слово пользователем желтым цветом + 2 часть слова -->
-		<p>
-			{{ colorName.firstHalf }}<span class="yellow">{{ subSearch }}</span
-			>{{ colorName.secondHalf }}
-		</p>
+		<!-- v-html нужен чтобы в colorName span читался как тэг а не как строка -->
+		<p v-html="colorName"></p>
 		<a :href="'https://' + website" target="_blank"> {{ website }}</a>
 	</div>
 </template>
@@ -16,19 +13,28 @@ export default {
 		name: String,
 		website: String,
 		subSearch: String,
-		findIndex: Number,
+		stringArray: Array,
 	},
 	data: function () {
 		return {};
 	},
 	computed: {
-		// функция раздробления слова на части
 		colorName() {
-			// 1 часть слова (до написанного слова пользователя)
-			const firstHalf = this.name.substring(0, this.findIndex);
-			// 2 часть слова после написанного слова пользователя
-			const secondHalf = this.name.substring(this.findIndex + this.subSearch.length);
-			return { firstHalf, secondHalf };
+			['Kur Weissnat'];
+			// пустой массив в которой записываем имена
+			const coloredNameArray = [];
+			// перебор по очереди разделенные строки, индекс в массиве
+			this.stringArray.forEach((str, index) => {
+				// записываем в массив строчку
+				coloredNameArray.push(str);
+				// если индекс не последний то добавляем после 1 строчки span (желтый цвет)
+				// внутрь span'a записываем введенное пользователем слово в input
+				if (index !== this.stringArray.length - 1) {
+					coloredNameArray.push(`<span class="yellow">${this.subSearch}</span>`);
+				}
+			});
+			// делаем из массива 1 строчку
+			return coloredNameArray.join('');
 		},
 	},
 };
