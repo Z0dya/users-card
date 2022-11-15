@@ -16,7 +16,9 @@
 							<a href="https://github.com/Z0dya/users-card" target="_blank">
 								<img :src="require('@/assets/img/Git.svg')" class="github" alt="gitLogo" draggable="false" />
 							</a>
-							<a href="#"> <img :src="require('@/assets/img/gitlab.svg')" class="gitlab" alt="gitlabLogo" draggable="false" /> </a>
+							<a href="https://git.informunity.ru/study/lazutkin-users-card" target="_blank">
+								<img :src="require('@/assets/img/gitlab.svg')" class="gitlab" alt="gitlabLogo" draggable="false" />
+							</a>
 						</div>
 					</div>
 				</div>
