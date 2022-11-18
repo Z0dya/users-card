@@ -13,8 +13,6 @@ export default {};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Roboto:wght@100;300;400;500;900&display=swap');
-
 .container {
 	margin: 5rem 25rem;
 }
@@ -27,7 +25,7 @@ export default {};
 }
 
 h1 {
-	color: 445964;
+	color: #445964;
 	font-weight: 300;
 	font-size: 5.5rem;
 }

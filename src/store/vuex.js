@@ -10,7 +10,7 @@ export default new Vuex.Store({
 		// данные из API
 		users: [],
 	},
-	// получать состояния из state ()
+	// получать состояния из state ()ё
 	getters: {
 		allData(state) {
 			return state.users;

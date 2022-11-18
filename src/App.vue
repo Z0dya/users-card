@@ -21,10 +21,15 @@ export default {
 
 <style>
 html {
+	font-family: 'OpenSans-Regular';
+	src: url('@/assets/fonts/Roboto-Black.ttf');
+	src: url('@/assets/fonts/Roboto-Bold.ttf');
+	src: url('@/assets/fonts/Roboto-Light.ttf');
+	src: url('@/assets/fonts/Roboto-Medium.ttf');
+	src: url('@/assets/fonts/Roboto-Regular.ttf');
+	src: url('@/assets/fonts/Roboto-Thin.ttf');
 	height: 100%;
 	font-size: 62.5%;
 	font-family: 'Roboto', sans-serif;
 }
-
-
 </style>

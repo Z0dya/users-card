@@ -10,6 +10,7 @@
 						<span class="title-vue">Vue Js</span>
 					</h1>
 					<router-link to="/Users" class="btnLink"> <button class="left__btnWork">Перейти к работе</button> </router-link>
+					<p class="version">Версия веб-приложения: {{ appVersion }}</p>
 					<div class="left__description">
 						<p>Исходники веб-приложения вы можете найти тут</p>
 						<div class="icons">
@@ -33,18 +34,20 @@
 
 <script>
 import Header from '../components/Header.vue';
+import { version } from '../../package';
+
 export default {
 	name: 'App',
 	components: { Header },
 	data: function () {
-		return {};
+		return {
+			appVersion: version,
+		};
 	},
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Roboto:wght@100;300;400;500;900&display=swap');
-
 html {
 	height: 100%;
 	font-size: 62.5%;
@@ -66,6 +69,11 @@ html {
 .leftSide {
 	display: flex;
 	flex-direction: column;
+}
+
+.version {
+	color: #43545f;
+	margin: 0;
 }
 
 .left__name {
