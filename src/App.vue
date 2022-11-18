@@ -1,7 +1,7 @@
 <template>
-	<div id="app">
+	<transition mode="out-in">
 		<router-view></router-view>
-	</div>
+	</transition>
 </template>
 
 <script>
@@ -21,7 +21,6 @@ export default {
 
 <style>
 html {
-	font-family: 'OpenSans-Regular';
 	src: url('@/assets/fonts/Roboto-Black.ttf');
 	src: url('@/assets/fonts/Roboto-Bold.ttf');
 	src: url('@/assets/fonts/Roboto-Light.ttf');
@@ -31,5 +30,22 @@ html {
 	height: 100%;
 	font-size: 62.5%;
 	font-family: 'Roboto', sans-serif;
+}
+
+.v-enter-active {
+	opacity: 0;
+}
+.v-enter-to {
+	opacity: 1;
+	transition: all 0.3s ease-out;
+}
+
+.v-leave-from {
+	opacity: 1;
+}
+
+.v-leave-to {
+	opacity: 0;
+	transition: all 0.3s ease-out;
 }
 </style>

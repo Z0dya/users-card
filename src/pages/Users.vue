@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container"> 
 		<Header></Header>
 		<div class="main">
 			<div class="main__table" v-if="allData">

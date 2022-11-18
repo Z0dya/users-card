@@ -1,32 +1,30 @@
 <template>
-	<div id="app">
-		<div class="container">
-			<Header></Header>
-			<div class="main">
-				<div class="leftSide">
-					<p class="left__name">Лазуткин Влад</p>
-					<h1 class="left__title">
-						Практическое задание
-						<span class="title-vue">Vue Js</span>
-					</h1>
-					<router-link to="/Users" class="btnLink"> <button class="left__btnWork">Перейти к работе</button> </router-link>
-					<p class="version">Версия веб-приложения: {{ appVersion }}</p>
-					<div class="left__description">
-						<p>Исходники веб-приложения вы можете найти тут</p>
-						<div class="icons">
-							<a href="https://github.com/Z0dya/users-card" target="_blank">
-								<img :src="require('@/assets/img/Git.svg')" class="github" alt="gitLogo" draggable="false" />
-							</a>
-							<a href="https://git.informunity.ru/study/lazutkin-users-card" target="_blank">
-								<img :src="require('@/assets/img/gitlab.svg')" class="gitlab" alt="gitlabLogo" draggable="false" />
-							</a>
-						</div>
+	<div class="container">
+		<Header></Header>
+		<div class="main">
+			<div class="leftSide">
+				<p class="left__name">Лазуткин Влад</p>
+				<h1 class="left__title">
+					Практическое задание
+					<span class="title-vue">Vue Js</span>
+				</h1>
+				<router-link to="/Users" class="btnLink"> <button class="left__btnWork">Перейти к работе</button> </router-link>
+				<p class="version">Версия веб-приложения: {{ appVersion }}</p>
+				<div class="left__description">
+					<p>Исходники веб-приложения вы можете найти тут</p>
+					<div class="icons">
+						<a href="https://github.com/Z0dya/users-card" target="_blank">
+							<img :src="require('@/assets/img/Git.svg')" class="github" alt="gitLogo" draggable="false" />
+						</a>
+						<a href="https://git.informunity.ru/study/lazutkin-users-card" target="_blank">
+							<img :src="require('@/assets/img/gitlab.svg')" class="gitlab" alt="gitlabLogo" draggable="false" />
+						</a>
 					</div>
 				</div>
-				<!-- require - он не знает путь во время компиляции, поэтому нужно использовать require -->
-				<div class="rightSide">
-					<img :src="require('@/assets/img/Home_art.svg')" alt="bigArt" draggable="false" />
-				</div>
+			</div>
+			<!-- require - он не знает путь во время компиляции, поэтому нужно использовать require -->
+			<div class="rightSide">
+				<img :src="require('@/assets/img/Home_art.svg')" alt="bigArt" draggable="false" />
 			</div>
 		</div>
 	</div>
