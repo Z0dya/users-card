@@ -1,12 +1,12 @@
 <template>
 	<div>
-		<div class="table__lists">
+		<div class="table__lists" @click="openMenu()">
 			<p>{{ name }}</p>
-			<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" class="arrow" ref="arrow" @click="openMenu()" />
+			<img :src="require('@/assets/img/arrowClosed.svg')" alt="arrow" :class="[{ arrowAnim: arrowAnim }, 'arrow']" draggable="false"/>
 		</div>
 		<!-- <hr width="100%" color="white" /> -->
 
-		<div class="table__description-block" ref="open">
+		<div class="table__description-block" :class="[{ open: open }, 'arrow']">
 			<div class="table__description">
 				<p>
 					Name: <span>{{ name }}</span>
@@ -18,7 +18,7 @@
 					City: <span>{{ city }}</span>
 				</p>
 			</div>
-			<img :src="require('@/assets/img/icon.svg')" alt="arrow" class="logoIcon" />
+			<img :src="require('@/assets/img/icon.svg')" alt="arrow" class="logoIcon" draggable="false"/>
 			<div class="table__description">
 				<p>
 					Email:
@@ -37,7 +37,7 @@
 				</p>
 			</div>
 		</div>
-		<hr width="100%" color="white" class="hr" ref="hr" />
+		<hr width="100%" color="white" :class="[{ 'hr-view': hr }, 'hr']" />
 	</div>
 </template>
 
@@ -55,15 +55,19 @@ export default {
 		company: String,
 	},
 	data: function () {
-		return {};
+		return {
+			arrowAnim: false,
+			open: false,
+			hr: false,
+		};
 	},
 	methods: {
 		openMenu() {
-			this.$refs.arrow.classList.toggle('arrowAnim');
-			this.$refs.open.classList.toggle('open');
+			this.arrowAnim = !this.arrowAnim;
+			this.open = !this.open;
 			//если не последний div то отрисовываем hr
 			if (this.index !== this.length - 1) {
-				this.$refs.hr.classList.toggle('hr-view');
+				this.hr = !this.hr;
 			}
 		},
 	},
@@ -80,6 +84,11 @@ export default {
 	color: white;
 	font-weight: 400;
 	align-items: center;
+
+}
+
+.table__lists {
+	cursor: pointer;
 }
 
 .arrow,
@@ -88,6 +97,7 @@ export default {
 	width: 5rem;
 	height: 3rem;
 	transition: all 0.3s ease;
+
 }
 
 .arrowAnim {
@@ -111,6 +121,7 @@ export default {
 	height: fit-content;
 	margin: 2rem;
 	border-radius: 1rem;
+	cursor: default;
 }
 
 .logoIcon {
