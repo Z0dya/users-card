@@ -13,9 +13,7 @@ import NotFound from './pages/NotFound.vue';
 export default {
 	name: 'App',
 	components: { Home, Users, Search, NotFound },
-	data: function () {
-		return {};
-	},
+
 };
 </script>
 
