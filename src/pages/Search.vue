@@ -10,7 +10,7 @@
 					</div>
 					<img :src="require('@/assets/img/search.svg')" alt="search" class="searchIcon" ref="search" @click="searchResult()" />
 				</div>
-				<div class="search__results" ref="result">
+				<div :class="[{ display: result }, 'search__results']">
 					<search-component
 						v-for="usersInfo in searchedUser"
 						:key="usersInfo.id"
@@ -21,7 +21,7 @@
 						:stringArray="usersInfo.stringArray"
 					></search-component>
 				</div>
-				<div class="noResults" ref="notFound">
+				<div v-bind:class="[{ display: notFound }, 'noResults']">
 					<h1>Не найдено 😞</h1>
 				</div>
 			</div>
@@ -43,6 +43,8 @@ export default {
 		return {
 			searchValue: '',
 			searchedUser: [],
+			notFound: false,
+			result: false,
 		};
 	},
 	computed: mapGetters(['allData']),
@@ -79,17 +81,17 @@ export default {
 			}
 			// выводим найденных юзеров
 			if (this.searchedUser.length) {
-				this.$refs.result.classList.add('display');
-				this.$refs.notFound.classList.remove('display');
+				this.result = true;
+				this.notFound = false;
 			} else {
 				// иначе отображаем "не найдено"
-				this.$refs.notFound.classList.add('display');
+				this.notFound = true;
 			}
 			// если пользователь ничего не ввел то выводим "ничего не найдено"
 			if (this.searchValue == '') {
 				{
-					this.$refs.result.classList.remove('display');
-					this.$refs.notFound.classList.add('display');
+					this.result = false;
+					this.notFound = true;
 				}
 			}
 		},
@@ -97,17 +99,14 @@ export default {
 		clearSearch() {
 			// стираем value input'a и закрываем найденные до этого значения
 			this.searchValue = '';
-			this.$refs.notFound.classList.remove('display');
-			if (this.$refs.result.classList.contains('display')) {
-				this.$refs.result.classList.remove('display');
-			}
+			this.notFound = false;
+			this.result = false;
 		},
 	},
 };
 </script>
 
 <style scoped>
-
 html {
 	height: 100%;
 	font-size: 62.5%;
