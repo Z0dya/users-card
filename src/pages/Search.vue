@@ -5,9 +5,9 @@
 				<div class="search__icons">
 					<div class="left-side">
 						<img :src="require('@/assets/img/cancel.svg')" alt="cancel" class="cancelIcon" @click="clearSearch()" />
-						<input type="text" placeholder="Введите имя" class="search__text" v-model="searchValue" />
+						<input type="text" placeholder="Введите имя" class="search__text" v-model="searchValue" @input="searchTrigger()" />
 					</div>
-					<img :src="require('@/assets/img/search.svg')" alt="search" class="searchIcon" ref="search" @click="searchResult()" />
+					<img :src="require('@/assets/img/search.svg')" alt="search" class="searchIcon" />
 				</div>
 				<div :class="[{ display: result }, 'search__results']">
 					<search-component
@@ -51,6 +51,11 @@ export default {
 		this.$store.dispatch('fetchUsers');
 	},
 	methods: {
+		searchTrigger() {
+			setTimeout(() => {
+				this.searchResult();
+			}, 300);
+		},
 		// функция поиска
 		searchResult() {
 			//обнуляем массив при каждом поиске
@@ -90,7 +95,7 @@ export default {
 			if (this.searchValue == '') {
 				{
 					this.result = false;
-					this.notFound = true;
+					this.notFound = false;
 				}
 			}
 		},
@@ -146,16 +151,12 @@ html {
 
 .searchIcon {
 	opacity: 0.7;
-	transition: all 0.2s ease;
-}
-
-.searchIcon:hover {
-	opacity: 1;
 }
 
 .cancelIcon {
 	opacity: 0.7;
 	transition: all 0.2s ease;
+	cursor: pointer;
 }
 
 .cancelIcon:hover {
@@ -188,9 +189,6 @@ html {
 
 .display {
 	display: block;
-}
-.search__icons img {
-	cursor: pointer;
 }
 
 .search__text {
