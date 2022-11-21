@@ -1,6 +1,5 @@
 <template>
 	<div class="container">
-		<Header></Header>
 		<div class="main">
 			<div class="leftSide">
 				<p class="left__name">Лазуткин Влад</p>

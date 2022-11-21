@@ -1,6 +1,5 @@
 <template>
 	<div class="container"> 
-		<Header></Header>
 		<div class="main">
 			<div class="main__table" v-if="allData">
 				<user-component
@@ -24,7 +23,6 @@
 		</div>
 	</div>
 </template>
-
 <script>
 import UserComponent from '@/components/UserComponent.vue';
 import Header from '../components/Header.vue';

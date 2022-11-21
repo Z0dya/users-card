@@ -1,6 +1,5 @@
 <template>
 	<div class="container">
-		<Header></Header>
 		<div class="main">
 			<div class="search">
 				<div class="search__icons">

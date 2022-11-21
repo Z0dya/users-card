@@ -1,7 +1,10 @@
 <template>
-	<transition mode="out-in">
-		<router-view></router-view>
-	</transition>
+	<div >
+		<Header v-if="$route.name !== '404'"></Header>
+		<transition mode="out-in">
+			<router-view> </router-view>
+		</transition>
+	</div>
 </template>
 
 <script>
@@ -9,11 +12,11 @@ import Home from './pages/Home.vue';
 import Users from './pages/Users.vue';
 import Search from './pages/Search.vue';
 import NotFound from './pages/NotFound.vue';
+import Header from './components/Header.vue';
 
 export default {
 	name: 'App',
-	components: { Home, Users, Search, NotFound },
-
+	components: { Home, Users, Search, NotFound, Header },
 };
 </script>
 
